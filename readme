@@ -75,7 +75,7 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
-
+None
 
 ------------------------------------------------------------------------
 What warnings does splint generate on strp.c, and what are your
@@ -92,7 +92,7 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
-
+None
 
 ------------------------------------------------------------------------
 What warnings does splint generate on replace.c, and what are your
@@ -108,13 +108,17 @@ disagreements with them? Copy the critTer warnings here, and express
 your disagreement after each warning. If there are no warnings, then
 write "None."
 
-
+None
 
 ------------------------------------------------------------------------
 Is it possible for Str_copy or Str_concat to call assert to verify
 that the destination memory area specified by the caller is large
 enough? Explain.
 
-
+This is not going to be possible because the assert call is able to 
+simply check if the pointer is somewhere null or not, but it is not able
+to directly access it or see how much space in memory it takes up. So, 
+it does not have this capability and checking if it is big enough in 
+memory will have to be done some other way.
 
 ------------------------------------------------------------------------
