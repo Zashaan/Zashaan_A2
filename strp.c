@@ -97,27 +97,19 @@ int Str_compare(const char *inputString1, const char *inputString2) {
     assert(inputString2 != NULL);
 
     /* goes through the strings until they differ */
-    while (*inputString1 == *inputString2) {
+    while (*inputString1 == *inputString2 && *inputString1 != '\0'
+        && *inputString2 != '\0') {
         inputString1++;
         inputString2++;
     }
 
-    /* creates the variables to store the chars now that we know they are different */
-    /* checks the cases where at least one of them saw an end char */
-    if (*inputString1 == '\0') {
-        /* checks if both ended */
-        if (*inputString2 == '\0') return 0;
-        /* if only string1 ended then return -1 */
-        else return -1;
-    }
-    /* if only string2 ended then return 1*/
-    else if (*inputString2 == '\0') return 1;
-
-    /* compare chars now that neither reached end char */
-    if (*inputString1 - *inputString2 < 0) {
+    /* compare chars now that they differ or ended */
+    if ((unsigned char) *inputString1 < (unsigned char) *inputString2) {
         return -1;
     }
-    else return 1;
+    else if ((unsigned char) *inputString1 > (unsigned char) *inputString2) {
+        return 1;
+    }
 
     /* if it reaches the end without differing, then return 0 */
     return 0;
