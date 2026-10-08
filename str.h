@@ -15,13 +15,13 @@ size_t Str_getLength(const char inputString[]);
 /*--------------------------------------------------------------------*/
 
 /* takes the characters in inputString2 and copies them into 
-   inputString1 */
+   inputString1. returns the edited inputString1 */
 char *Str_copy(char inputString1[], const char inputString2[]);
 
 /*--------------------------------------------------------------------*/
 
 /* takes the characters in inputString2 and concatenates them to 
-   inputString1 */
+   inputString1. returns the edited inputString1 */
 char *Str_concat(char inputString1[], const char inputString2[]);
 
 /*--------------------------------------------------------------------*/
