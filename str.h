@@ -1,6 +1,8 @@
 #ifndef STR_INCLUDED
 #define STR_INCLUDED
 
+#include <stddef.h>
+
 /*--------------------------------------------------------------------*/
 
 /* return the number of characters that are in the string passed in */
