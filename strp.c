@@ -34,12 +34,12 @@ size_t Str_getLength(const char *inputString) {
 /* takes the characters in string2 and copies them into string1 */
 char *Str_copy(char *inputString1, const char *inputString2) {
 
+    /* creates the pointer to use that will be returned */
+    char *returnPointer = inputString1;
+
     /* asserts that both the pointers passed in are not null */
     assert(inputString1 != NULL);
     assert(inputString2 != NULL);
-
-    /* creates the pointer to use that will be returned */
-    char *returnPointer = inputString1;
 
     /* goes through string2 and fills in values */
     while (*inputString2 != '\0') {
@@ -60,12 +60,15 @@ char *Str_copy(char *inputString1, const char *inputString2) {
 /* takes the characters in string2 and concatenates them to string 1 */
 char *Str_concat(char *inputString1, const char *inputString2) {
 
+    /* creates the return pointer and sets it to the end of string 1 */
+    char *returnPointer;
+
     /* asserts that both the pointers passed in are not null */
     assert(inputString1 != NULL);
     assert(inputString2 != NULL);
 
-    /* creates the return pointer and sets it to the end of string 1 */
-    char *returnPointer = inputString1 + Str_getLength(inputString1);
+    /* sets the value */
+    returnPointer = inputString1 + Str_getLength(inputString1);
 
     /* sets the string1 pointer to the end of string1 too */
     inputString1 = returnPointer;
@@ -76,6 +79,7 @@ char *Str_concat(char *inputString1, const char *inputString2) {
         inputString1++;
         inputString2++;
     }
+    *inputString1 = '\0';
 
     /* returns the return pointer */
     return returnPointer;
@@ -125,14 +129,14 @@ int Str_compare(const char *inputString1, const char *inputString2) {
    string2 shows up in string 1*/
 char *Str_search(const char *inputString1, const char *inputString2) {
 
+    /* creates the pointers to be used during the loops */
+    const char *currentPointer = inputString1;
+    const char *pointer1 = inputString1;
+    const char *pointer2 = inputString2;
+
     /* asserts that both the pointers passed in are not null */
     assert(inputString1 != NULL);
     assert(inputString2 != NULL);
-
-    /* creates the pointers to be used during the loops */
-    char *currentPointer = inputString1;
-    char *pointer1 = inputString1;
-    char *pointer2 = inputString2;
 
     /* check if string2 is an empty string */
     if (*inputString2 == '\0') return (char *)inputString1;
@@ -154,6 +158,8 @@ char *Str_search(const char *inputString1, const char *inputString2) {
         if (*pointer2 == '\0') {
             return (char *)currentPointer;
         }
+
+        currentPointer++;
     }
 
     /* if string 2 not found, return null */

@@ -19,7 +19,12 @@
 
 static size_t replaceAndWrite(const char *pcLine,
                               const char *pcFrom, const char *pcTo)
-{
+{   
+   /* creates the variables needed for the function */
+   size_t count;
+   size_t sizeFrom;
+   const char *currentLineTrack;
+   const char *currentMatchTrack;
    
    /* asserts to see if the strings passed in are not null */
    assert(pcLine != NULL);
@@ -29,24 +34,25 @@ static size_t replaceAndWrite(const char *pcLine,
    /* checks to see if pcFrom is an empty string and prints to stdout 
       and returns 0 if it is */
    if (*pcFrom == '\0') {
-      printf(pcLine);
+      printf("%s", pcLine);
       return 0;
    }
-   
-   /* creates the variables needed for the function */
-   size_t count = 0;
-   size_t sizeFrom = Str_getLength(pcFrom);
-   char *currentLineTrack = pcLine;
-   char *currentMatchTrack = Str_search(currentLineTrack, pcFrom);
+
+   /* assigns the values to the variables */
+   count = 0;
+   sizeFrom = Str_getLength(pcFrom);
+   currentLineTrack = pcLine;
+   currentMatchTrack = Str_search(currentLineTrack, pcFrom);
 
    /* loops through the pcLine to find occurences of pcFrom and changes
       it to pcTo */
    while (*currentMatchTrack != NULL) {
       while (currentLineTrack != currentMatchTrack) {
-         printf(*currentLineTrack);
+         putchar(*currentLineTrack);
+         currentLineTrack++;
       }
 
-      printf(pcTo);
+      printf("%s", pcTo);
 
       count++;
 
@@ -55,11 +61,10 @@ static size_t replaceAndWrite(const char *pcLine,
    }
 
    /* prints out the remaining part of pcLine */
-   printf(currentLineTrack);
+   printf("%s", currentLineTrack);
 
    /* returns the number of occurences */
    return count;
-
 }
 
 /*--------------------------------------------------------------------*/

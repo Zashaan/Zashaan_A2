@@ -57,14 +57,17 @@ char *Str_copy(char inputString1[], const char inputString2[]) {
 /* takes the characters in string2 and concatenates them to string 1 */
 char *Str_concat(char inputString1[], const char inputString2[]) {
 
+    /* creates the variables to be used to track indices */
+    size_t current;
+    size_t trackString2;
+
     /* asserts that both strings are valid */
     assert(inputString1 != NULL);
     assert(inputString2 != NULL);
 
-    /* creates the variables to be used to track indices. starts 
-       current at end of string1 */
-    int current = Str_getLength(inputString1);
-    int trackString2 = 0;
+    /* assigns values now */
+    current = Str_getLength(inputString1);
+    trackString2 = 0;
 
     /* continues by filling in the contents of string2 */
     while (inputString2[trackString2] != '\0') {
@@ -87,12 +90,14 @@ char *Str_concat(char inputString1[], const char inputString2[]) {
    1 if string1 is lexicographically more than string2 */
 int Str_compare(const char inputString1[], const char inputString2[]) {
 
+    /* creates the variables to be used to track indices and chars */
+    size_t current = 0;
+    unsigned char currentString1;
+    unsigned char currentString2;
+    
     /* asserts that both strings are valid */
     assert(inputString1 != NULL);
     assert(inputString2 != NULL);
-
-    /* creates the variables to be used to track indices */
-    int current = 0;
 
     /* loops through the strings until the characters differ or one of 
        them reaches the end char*/
@@ -103,8 +108,8 @@ int Str_compare(const char inputString1[], const char inputString2[]) {
     /* since the characters are now different, check to see which one 
        is actually lexiographically less */
     /* store the chars that each string is at */
-    char currentString1 = inputString1[current];
-    char currentString2 = inputString2[current];
+    currentString1 = inputString1[current];
+    currentString2 = inputString2[current];
 
     /* check if one reached the end and return accordingly if so */
     if (currentString1 == '\0') {
@@ -134,11 +139,8 @@ int Str_compare(const char inputString1[], const char inputString2[]) {
 char *Str_search(const char inputString1[], const char inputString2[]) {
 
     /* creates the variables to be used to track indices */
-    int current1 = 0;
-    int current2 = 0;
-
-    /* stores the length of string2 */
-    int lengthString2 = Str_getLength(inputString2);
+    size_t current1 = 0;
+    size_t current2 = 0;
     
     /* asserts that both strings are valid */
     assert(inputString1 != NULL);
