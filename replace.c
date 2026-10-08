@@ -20,7 +20,46 @@
 static size_t replaceAndWrite(const char *pcLine,
                               const char *pcFrom, const char *pcTo)
 {
-   /* Insert your code here. */
+   
+   /* asserts to see if the strings passed in are not null */
+   assert(pcLine != NULL);
+   assert(pcFrom != NULL);
+   assert(pcTo != NULL);
+
+   /* checks to see if pcFrom is an empty string and prints to stdout 
+      and returns 0 if it is */
+   if (*pcFrom == '\0') {
+      printf(pcLine);
+      return 0;
+   }
+   
+   /* creates the variables needed for the function */
+   size_t count = 0;
+   size_t sizeFrom = Str_getLength(pcFrom);
+   char *currentLineTrack = pcLine;
+   char *currentMatchTrack = Str_search(currentLineTrack, pcFrom);
+
+   /* loops through the pcLine to find occurences of pcFrom and changes
+      it to pcTo */
+   while (*currentMatchTrack != NULL) {
+      while (currentLineTrack != currentMatchTrack) {
+         printf(*currentLineTrack);
+      }
+
+      printf(pcTo);
+
+      count++;
+
+      currentLineTrack = currentMatchTrack + sizeFrom;
+      currentMatchTrack = Str_search(currentLineTrack, pcFrom);
+   }
+
+   /* prints out the remaining part of pcLine */
+   printf(currentLineTrack);
+
+   /* returns the number of occurences */
+   return count;
+
 }
 
 /*--------------------------------------------------------------------*/
@@ -56,7 +95,7 @@ int main(int argc, char *argv[])
    pcTo = argv[2];
 
    while (fgets(acLine, MAX_LINE_SIZE, stdin) != NULL)
-      /* Insert your code here. */
+      uReplaceCount += replaceAndWrite(acLine, pcFrom, pcTo);
 
    fprintf(stderr, "%lu replacements\n", (unsigned long)uReplaceCount);
    return 0;

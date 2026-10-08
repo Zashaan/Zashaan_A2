@@ -1,0 +1,171 @@
+#include <stdio.h>
+#include "str.h"
+#include <assert.h>
+
+/*--------------------------------------------------------------------*/
+/* the code below is for all of the functions in the string class 
+   implemented using the array implementation */
+/*--------------------------------------------------------------------*/
+
+/* return the number of characters that are in the string passed in */
+size_t Str_getLength(const char inputString[]) {
+
+    /* initializes the tracking variable */
+    size_t returnLength = 0;
+
+    /* asserts that the string is not null */
+    assert(inputString != NULL);
+
+    /* goes through the string in an array format until the end 
+       character is reached, incrementing tracking variable as we go */
+    while(inputString[returnLength] != '\0') {
+        returnLength++;
+    }
+
+    /* returns the tracking variable once its been through the string */
+    return returnLength;
+}
+
+/*--------------------------------------------------------------------*/
+
+/* takes the characters in string2 and copies them into string1 */
+char *Str_copy(char inputString1[], const char inputString2[]) {
+
+    /* initializes the tracking variable */
+    int current = 0;
+
+    /* asserts that the strings are not null */
+    assert(inputString1 != NULL);
+    assert(inputString2 != NULL);
+
+    /* goes through string 2 and copies it over into string 1 until
+       the end of string 2 is reached */
+    while (inputString2[current] != '\0') {
+        inputString1[current] = inputString2[current];
+        current++;
+    }
+
+    /* copies over the end character to the end of string 1 */
+    inputString1[current] = '\0';
+
+    /* returns the final string that has the copied value */
+    return inputString1;
+}
+
+/*--------------------------------------------------------------------*/
+
+/* takes the characters in string2 and concatenates them to string 1 */
+char *Str_concat(char inputString1[], const char inputString2[]) {
+
+    /* asserts that both strings are valid */
+    assert(inputString1 != NULL);
+    assert(inputString2 != NULL);
+
+    /* creates the variables to be used to track indices. starts 
+       current at end of string1 */
+    int current = Str_getLength(inputString1);
+    int trackString2 = 0;
+
+    /* continues by filling in the contents of string2 */
+    while (inputString2[trackString2] != '\0') {
+        inputString1[current] = inputString2[trackString2];
+        trackString2++;
+        current++;
+    }
+
+    /* once all the contents have been copied, add the end char */
+    inputString1[current] = '\0';
+
+    /* returns the final array */
+    return inputString1;
+}
+
+/*--------------------------------------------------------------------*/
+
+/* looks at the contents of string1 and string2. returns 0 if they are
+   equal in character contents, -1 if string1 is lexicographically less,
+   1 if string1 is lexicographically more than string2 */
+int Str_compare(const char inputString1[], const char inputString2[]) {
+
+    /* asserts that both strings are valid */
+    assert(inputString1 != NULL);
+    assert(inputString2 != NULL);
+
+    /* creates the variables to be used to track indices */
+    int current = 0;
+
+    /* loops through the strings until the characters differ or one of 
+       them reaches the end char*/
+    while(inputString1[current] == inputString2[current]) {
+        current++;
+    }
+
+    /* since the characters are now different, check to see which one 
+       is actually lexiographically less */
+    /* store the chars that each string is at */
+    char currentString1 = inputString1[current];
+    char currentString2 = inputString2[current];
+
+    /* check if one reached the end and return accordingly if so */
+    if (currentString1 == '\0') {
+        /* if both reached the end return 0 */
+        if (currentString2 == '\0') return 0;
+        /* if not then string1 is less */
+        else return -1;
+    }
+    /* if only string 2 reached the end, then it is less so return 1 */
+    else if (currentString2 == '\0') return 1;
+
+    /* now we know end has not been reached for either, so compare 
+       the chars */
+    if (currentString1 - currentString2 < 0) {
+        return -1;
+    }
+    else return 1;
+
+    /* if it reaches the end without differing, then return 0 */
+    return 0;
+}
+
+/*--------------------------------------------------------------------*/
+
+/* looks through string1 and returns the first place string2 shows up 
+   in string 1*/
+char *Str_search(const char inputString1[], const char inputString2[]) {
+
+    /* creates the variables to be used to track indices */
+    int current1 = 0;
+    int current2 = 0;
+
+    /* stores the length of string2 */
+    int lengthString2 = Str_getLength(inputString2);
+    
+    /* asserts that both strings are valid */
+    assert(inputString1 != NULL);
+    assert(inputString2 != NULL);
+
+    /* checks if string2 is empty and returns accordingly */
+    if (inputString2[0] == '\0') {
+        return (char *)inputString1;
+    }
+
+    /* searches through string1 to find characters of string 2 until the
+       end of one of them is reached */
+    for (current1 = 0; inputString1[current1] != '\0'; current1++) {
+        current2 = 0;
+
+        while (inputString2[current2] != '\0' && inputString1[current1
+             + current2] == inputString2[current2]) {
+            current2++;
+        }
+
+        if (inputString2[current2] == '\0') {
+            return (char *)(inputString1 + current1);
+        }
+    }
+
+    /* if string2 not in string1, return null */
+    return NULL;
+}
+
+/*--------------------------------------------------------------------*/
