@@ -46,7 +46,7 @@ static size_t replaceAndWrite(const char *pcLine,
 
    /* loops through the pcLine to find occurences of pcFrom and changes
       it to pcTo */
-   while (*currentMatchTrack != NULL) {
+   while (currentMatchTrack != NULL) {
       while (currentLineTrack != currentMatchTrack) {
          putchar(*currentLineTrack);
          currentLineTrack++;

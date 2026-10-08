@@ -68,10 +68,10 @@ char *Str_concat(char *inputString1, const char *inputString2) {
     assert(inputString2 != NULL);
 
     /* sets the value */
-    returnPointer = inputString1 + Str_getLength(inputString1);
+    returnPointer = inputString1;
 
-    /* sets the string1 pointer to the end of string1 too */
-    inputString1 = returnPointer;
+    /* gets to the end of string1 */
+    while (*inputString1 != '\0') inputString1++;
 
     /* goes through string2 and adds the characters */
     while (*inputString2 != '\0') {

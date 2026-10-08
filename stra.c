@@ -101,32 +101,25 @@ int Str_compare(const char inputString1[], const char inputString2[]) {
 
     /* loops through the strings until the characters differ or one of 
        them reaches the end char*/
-    while(inputString1[current] == inputString2[current]) {
+    while(inputString1[current] == inputString2[current] && 
+        inputString1[current] != '\0' && 
+        inputString2[current] != '\0') {
         current++;
     }
 
     /* since the characters are now different, check to see which one 
        is actually lexiographically less */
     /* store the chars that each string is at */
-    currentString1 = inputString1[current];
-    currentString2 = inputString2[current];
+    currentString1 = (unsigned char)inputString1[current];
+    currentString2 = (unsigned char)inputString2[current];
 
-    /* check if one reached the end and return accordingly if so */
-    if (currentString1 == '\0') {
-        /* if both reached the end return 0 */
-        if (currentString2 == '\0') return 0;
-        /* if not then string1 is less */
-        else return -1;
-    }
-    /* if only string 2 reached the end, then it is less so return 1 */
-    else if (currentString2 == '\0') return 1;
-
-    /* now we know end has not been reached for either, so compare 
-       the chars */
-    if (currentString1 - currentString2 < 0) {
+    /* compare the characters now and return accordingly */
+    if (currentString1 < currentString2) {
         return -1;
     }
-    else return 1;
+    else if (currentString1 > currentString2) {
+        return 1;
+    }
 
     /* if it reaches the end without differing, then return 0 */
     return 0;
